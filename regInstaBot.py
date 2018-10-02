@@ -43,7 +43,7 @@ while(count <=1):
     result = json.loads(result)
     if result["account_created"]:
         fileu = codecs.open("UserlistCreated.txt", "a", "utf-8")
-        fileu.writelines('\n' + str(username) + '\t:\t' + password + '\t:\t' + str(email) + '\t:\t' + str(result["account_created"])+'\t:\t'+datetime.datetime.now())
+        fileu.writelines('\n' + str(username) + '\t:\t' + password + '\t:\t' + str(email) + '\t:\t' + str(result["account_created"])+'\t:\t'+str(datetime.datetime.now()))
         fileu.close()
     else :
         fileu = codecs.open("Erorlist.txt", "a", "utf-8")
