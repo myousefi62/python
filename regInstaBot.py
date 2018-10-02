@@ -29,6 +29,8 @@ fileu.writelines('\nusername\t:\tpassword\t:\temail\t:\taccount_created\t:\terro
 fileu.close()
 count = 0
 while(count <=1):
+    if count != 0 :
+        time.sleep(120)
     username = userGen()
     password = passGen()
     email    = emailGen(username)
@@ -39,10 +41,6 @@ while(count <=1):
 
     result = requests.request("post", URL2, data=params, headers=headers).content
     result = json.loads(result)
-    """print result
-    print type(result)
-    print (username , password , email)
-    """
     if result["account_created"]:
         fileu = codecs.open("UserlistCreated.txt", "a", "utf-8")
         fileu.writelines('\n' + str(username) + '\t:\t' + password + '\t:\t' + str(email) + '\t:\t' + str(result["account_created"])+'\t:\t'+datetime.datetime.now())
@@ -51,21 +49,5 @@ while(count <=1):
         fileu = codecs.open("Erorlist.txt", "a", "utf-8")
         fileu.writelines('\n'+username+'\t:\t'+password+'\t:\t'+email+'\t:\t'+str(result["account_created"])+'\t:\t'+str(result["errors"])+'\t:\t'+str(result["error_type"])+'\t:\t'+str(result["status"])+'\t:\t'+str(datetime.datetime.now()))
         fileu.close()
-
-    # with open('listUser.json', 'a', encoding='utf-8') as fp:
-    #     json.dump(params, fp, ensure_ascii=False)
-    #     json.dump(result, fp, ensure_ascii=False)
-    """fileu = codecs.open("listUser", "a", "utf-8")
-    fileu.writelines(params)
-    fileu.writelines(result)
-    fileu.close()"""
-
-    """f = open("listUser.txt", "a")
-    str = "Username: " + username + " Password: " + password +  " Email: " + email
-    print (type(str))
-    print(params)
-    f.writelines(params)
-    f.writelines(result)"""
-    time.sleep(60)
     count += 1
 print("The End Script")
